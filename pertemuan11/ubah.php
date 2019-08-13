@@ -1,20 +1,24 @@
 <?php
 require 'Functions.php';
+// ambil data di URL
+$id = $_GET["id"];
+// query data mahasiswa berdasarkan id
+$mhs = query("SELECT * FROM mahasiswa WHERE id = $id")[0];
 
 // cek apakah tombol submit sudah di tekan ataw belum
 if( isset($_POST["submit"]) ) {
    
-    // cek apakah data berhasil di tambahkan ataw tida
-     if( tambah($_POST) > 0 ) {
+    // cek apakah data berhasil di ubah ataw tida
+     if( ubah($_POST) > 0 ) {
          echo " <script> 
-                 alert('data berhasil di tambahkan!'); 
+                 alert('data berhasil di ubah!'); 
                  document.location.href = 'index.php';
              </script>
              ";
      } else {
          echo  "
          <script>
-             alert('data gagal di tambahkan!'); 
+             alert('data gagal di ubah!'); 
              document.location.href = 'index.php';
      </script>";
   }
@@ -30,36 +34,37 @@ if( isset($_POST["submit"]) ) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Tambah Data Mahasiswa</title>
+    <title>Ubah Data Mahasiswa</title>
 </head>
 <body>
-    <h1> Tambah data mahasiswa</h1>
+    <h1> Ubah Data Mahasiswa</h1>
 
     <form action="" method="post">
+        <input type="hidden" name="id" value="<?= $mhs["id"]; ?>" >
       <ul>
           <li>
             <label for="nrp">NRP :</label>
-             <input type="text" name="nrp" id="nrp" required>
+             <input type="text" name="nrp" id="nrp" required value="<?= $mhs["nrp"]; ?>">
           </li>
           <li>
              <label for="nama">Nama :</label>
-             <input type="text" name="nama" id="nama" required>
+             <input type="text" name="nama" id="nama" required value="<?= $mhs["nama"]; ?>">
           </li>
           <li>
              <label for="email">Email :</label>
-             <input type="text" name="email" id="email" required>
+             <input type="text" name="email" id="email" required value="<?= $mhs ["email"]; ?>">
         </li>
          <li>
              <label for="Jurusan">Jurusan :</label>
-             <input type="text" name="jurusan" id="jurusan">
+             <input type="text" name="jurusan" id="jurusan" value="<?= $mhs["jurusan"]; ?>">
          </li>
          <li>
              <label for="gambar">Photo :</label>
-             <input type="text" name="gambar" id="gambar">
+             <input type="text" name="gambar" id="gambar" value="<?= $mhs["gambar"]; ?>">
          </li>
          <br>
            <li>
-             <button type="submit" name="submit">Tambah kan data !</button>
+             <button type="submit" name="submit">ubah data !</button>
          </li>
       </ul>
     </form>
