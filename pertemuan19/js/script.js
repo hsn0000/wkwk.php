@@ -12,11 +12,11 @@ keyword.addEventListener('keyup', function() {
     // cek kesiapan ajak
     xhr.onreadystatechange = function() {
         if( xhr.readyState == 4 && xhr.status == 200 ) {
-            console.log('ajak ok!');
+            container.innerHTML = xhr.responseText;
         }
     }
     // eksekusi ajak
-    xhr.open('GET', 'ajax/coba.txt', true);
+    xhr.open('GET', 'ajax/mahasiswa.php?keyword=' + keyword.value, true);
     xhr.send();
     
 
